@@ -83,6 +83,8 @@ if [ -n "$USE_QUBES_REPO_VERSION" ]; then
     if [ -r qubes-release-$USE_QUBES_REPO_VERSION-signing-key.asc ]; then
         chroot $DIR rpm --import /dev/stdin < \
             qubes-release-$USE_QUBES_REPO_VERSION-signing-key.asc || true
+        chroot $DIR rpm --import /dev/stdin < \
+            ${PLUGIN_DIR}/keys/RPM-GPG-KEY-qubes-$USE_QUBES_REPO_VERSION-centos || true
     fi
     if [ "0$USE_QUBES_REPO_TESTING" -gt 0 ]; then
         if [ "$YUM" = "dnf" ]; then
